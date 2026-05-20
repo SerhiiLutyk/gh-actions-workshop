@@ -1,0 +1,30 @@
+name: Hello World Training Workflow
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened, edited]
+
+env:
+  MY_ENV: "My custom variable value"
+
+jobs:
+  hello-world-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the User
+        run: echo "Hello World!"
+
+      - name: List files before checkout
+        run: ls -l
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: List files after checkout
+        run: ls -l
+
+      - name: Run a multi-line script
+        run: |
+          echo "Custom env variable: $MY_ENV"
+          echo "The user who triggered this is: $GITHUB_ACTOR"
